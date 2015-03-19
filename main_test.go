@@ -17,7 +17,7 @@ func TestCreate(t *testing.T) {
 
 func BenchmarkTestCreate(b *testing.B) {
     for i := 0; i < b.N; i++ {
-        _, _ = createUid()
+        _, _ = NewUid()
     }
 }
 
