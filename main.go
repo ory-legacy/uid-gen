@@ -48,13 +48,13 @@ func main() {
 }
 
 func createHandler(w http.ResponseWriter, r *http.Request) {
-    i, is := createUid()
+    i := NewUid()
     e := DataCarrier{
         ApiVersion: ApiVersion,
         Id: uuid.NewRandom(),
         Data: Data{
             Uid: i,
-            UidStr: is,
+            UidStr: strconv.FormatUint(i, 10),
         },
     }
 
@@ -84,7 +84,6 @@ func jsonError(err error) ([]byte, error) {
     })
 }
 
-func createUid() (uint64, string) {
-    id := numeric.UInt64()
-    return id, strconv.FormatUint(id, 10)
+func NewUid() uint64 {
+    return numeric.UInt64()
 }
