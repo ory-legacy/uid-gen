@@ -40,7 +40,7 @@ const (
 
 func main() {
     host := env.Getenv("HOST", "")
-    port := env.Getenv("PORT", "24123")
+    port := env.Getenv("PORT", "80")
     listen := fmt.Sprintf("%s:%s", host, port)
     r := mux.NewRouter()
     r.HandleFunc("/uids", createHandler).Methods("POST")

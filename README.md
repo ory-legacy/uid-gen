@@ -12,12 +12,40 @@ JavaScript does not support 64 bit integers. Use the "idStr" field, if you're us
 ```
 go get github.com/ory-platform/uid
 ```
+## Usage
 
-## API
+### Library
 
-## UID Collection [/uids]
+```
+package main
 
-### Create a UID [POST]
+import (
+    "fmt"
+    "github.com/ory-platform/uid"
+)
+
+func main() {
+    fmt.Printf("%d", uid.NewUid())
+}
+```
+
+### RESTful server
+
+To start the server, do:
+* Windows: `%GOPATH%\bin\uid`
+* MacOS & Linux: `$GOPATH/bin/uid`
+
+The following environment variables are available:
+
+| Variable             | Default                           | Description                          |
+| -------------------- | --------------------------------- | ------------------------------------ |
+| PORT                 | `80`                              | Port the application listens on      |
+| HOST                 | `null`                            | Host to listen on (null = all hosts) |
+
+
+#### UID Collection [/uids]
+
+##### Create a UID [POST]
 + Response 200 (application/json)
 
         {
