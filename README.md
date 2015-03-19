@@ -7,6 +7,8 @@ A library and RESTful webservice creating cryptographically strong pseudo-random
 **ATTENTION**  
 JavaScript does not support 64 bit integers. Use the "idStr" field, if you're using JS.
 
+*Collision probability:* [This](http://preshing.com/20110504/hash-collision-probabilities) is an excellent document explaining hash collision probability of n bits.
+
 ## Install
 
 ```
