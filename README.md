@@ -1,10 +1,17 @@
-# uid-server
-A library and RESTful webservice creating 64bit unique unsigned integers
+# Unique Identity (uid)
+
+A library and RESTful webservice creating cryptographically strong pseudo-random 64bit integers.
 
 [![Build Status](https://travis-ci.org/ory-platform/uid-server.svg)](https://travis-ci.org/ory-platform/uid-server)
 
 **ATTENTION**  
 JavaScript does not support 64 bit integers. Use the "idStr" field, if you're using JS.
+
+## Install
+
+```
+go get github.com/ory-platform/uid
+```
 
 ## API
 
