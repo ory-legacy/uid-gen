@@ -16,8 +16,7 @@ go get github.com/ory-platform/uid
 
 ### Library
 
-```
-package main
+```go
 
 import (
     "fmt"
