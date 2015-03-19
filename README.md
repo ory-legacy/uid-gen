@@ -1,5 +1,5 @@
 # uid-server
-A RESTful service creating 64bit unique unsigned integers
+A library and RESTful webservice creating 64bit unique unsigned integers
 
 [![Build Status](https://travis-ci.org/ory-platform/uid-server.svg)](https://travis-ci.org/ory-platform/uid-server)
 
