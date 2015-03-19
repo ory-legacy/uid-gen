@@ -2,8 +2,6 @@ language: go
 
 go:
     - 1.4
-    - release
-    - tip
 
 install:
     - go get -d -v ./... && go build -v ./...
