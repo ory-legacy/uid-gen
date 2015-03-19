@@ -47,6 +47,7 @@ func main() {
     log.Fatal(http.ListenAndServe(listen, r))
 }
 
+// createHandler is a HTTP handler for returning random uint64s
 func createHandler(w http.ResponseWriter, r *http.Request) {
     i := NewUid()
     e := DataCarrier{
@@ -73,6 +74,7 @@ func createHandler(w http.ResponseWriter, r *http.Request) {
     w.Write(j)
 }
 
+// jsonError is creates an ErrorCarrier and returns a byte slice
 func jsonError(err error) ([]byte, error) {
     return json.Marshal(ErrorCarrier{
         ApiVersion: ApiVersion,
@@ -84,6 +86,7 @@ func jsonError(err error) ([]byte, error) {
     })
 }
 
+// NewUid returns a cryptographically strong pseudo-random uint64
 func NewUid() uint64 {
     return numeric.UInt64()
 }
