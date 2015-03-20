@@ -7,10 +7,9 @@ import (
     "github.com/gorilla/mux"
     "log"
     "net/http"
-    "github.com/ory-libs/env"
-    "github.com/ory-libs/rand/numeric"
     "strconv"
-)
+    "github.com/ory-platform/common/env"
+    "github.com/ory-platform/common/rand/numeric")
 
 type Data struct {
     Uid    uint64 `json:"uid"`
