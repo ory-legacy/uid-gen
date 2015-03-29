@@ -2,7 +2,7 @@
 
 A library and RESTful webservice creating cryptographically strong pseudo-random 64bit integers (uint64).
 
-[![Build Status](https://travis-ci.org/ory-platform/uid.svg?branch=master)](https://travis-ci.org/ory-platform/uid)
+[![Build Status](https://travis-ci.org/ory-am/uid.svg?branch=master)](https://travis-ci.org/ory-am/uid)
 
 **ATTENTION**  
 JavaScript does not support 64 bit integers. Use the "idStr" field, if you're using JS.
@@ -12,7 +12,7 @@ JavaScript does not support 64 bit integers. Use the "idStr" field, if you're us
 ## Install
 
 ```
-go get github.com/ory-platform/uid
+go get github.com/ory-am/uid
 ```
 ## Usage
 
@@ -22,7 +22,7 @@ go get github.com/ory-platform/uid
 
 import (
     "fmt"
-    "github.com/ory-platform/uid"
+    "github.com/ory-am/uid"
 )
 
 func main() {

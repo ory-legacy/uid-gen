@@ -8,8 +8,8 @@ import (
     "log"
     "net/http"
     "strconv"
-    "github.com/ory-platform/common/env"
-    "github.com/ory-platform/common/rand/numeric")
+    "github.com/ory-am/common/env"
+    "github.com/ory-am/common/rand/numeric")
 
 type Data struct {
     Uid    uint64 `json:"uid"`
