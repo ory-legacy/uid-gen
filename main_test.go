@@ -1,68 +1,68 @@
 package main
 
 import (
-    "github.com/stretchr/testify/assert"
-    "github.com/gorilla/mux"
-    "net/http"
-    "net/http/httptest"
-    "testing"
-    "encoding/json"
-    "strconv"
-    "log"
-    "errors")
+	"encoding/json"
+	"errors"
+	"github.com/gorilla/mux"
+	"github.com/stretchr/testify/assert"
+	"log"
+	"net/http"
+	"net/http/httptest"
+	"strconv"
+	"testing"
+)
 
 func TestCreate(t *testing.T) {
-    mockUidCreate(t)
+	mockUidCreate(t)
 }
 
 func BenchmarkTestCreate(b *testing.B) {
-    for i := 0; i < b.N; i++ {
-        _ = NewUid()
-    }
+	for i := 0; i < b.N; i++ {
+		_ = NewUid()
+	}
 }
 
 func TestCreateUnique(t *testing.T) {
-    id1 := mockUidCreate(t)
-    id2 := mockUidCreate(t)
-    assert.NotEqual(t, id1.Data.Uid, id2.Data.Uid)
-    log.Printf("Created Uid %d and %d", id1.Data.Uid, id2.Data.Uid)
+	id1 := mockUidCreate(t)
+	id2 := mockUidCreate(t)
+	assert.NotEqual(t, id1.Uid, id2.Uid)
+	log.Printf("Created Uid %d and %d", id1.Uid, id2.Uid)
 }
 
 func TestJsonError(t *testing.T) {
-    var ec ErrorCarrier
+	var ec errorResponse
 
-    err := errors.New("foo")
-    b, err := jsonError(err)
-    assert.Nil(t, err)
+	err := errors.New("foo")
+	b, err := jsonError(err)
+	assert.Nil(t, err)
 
-    err = json.Unmarshal(b, &ec)
-    assert.Nil(t, err)
-    assert.Equal(t, "foo", ec.Error.Message)
-    assert.Equal(t, 500, ec.Error.Code)
+	err = json.Unmarshal(b, &ec)
+	assert.Nil(t, err)
+	assert.Equal(t, "foo", ec.Message)
+	assert.Equal(t, 500, ec.Code)
 
 }
 
-func mockUidCreate(t *testing.T) DataCarrier {
-    m := mux.NewRouter()
-    recorder := httptest.NewRecorder()
-    req, err := http.NewRequest("POST", "http://example.com/uids", nil)
-    assert.Nil(t, err)
-    m.HandleFunc("/uids", createHandler).Methods("POST")
-    m.ServeHTTP(recorder, req)
+func mockUidCreate(t *testing.T) successResponse {
+	m := mux.NewRouter()
+	recorder := httptest.NewRecorder()
+	req, err := http.NewRequest("POST", "http://example.com/uids", nil)
+	assert.Nil(t, err)
+	m.HandleFunc("/uids", createHandler).Methods("POST")
+	m.ServeHTTP(recorder, req)
 
-    assert.Nil(t, err)
-    assert.Equal(t, 200, recorder.Code)
-    assert.NotEmpty(t, recorder.Body)
+	assert.Nil(t, err)
+	assert.Equal(t, 200, recorder.Code)
+	assert.NotEmpty(t, recorder.Body)
 
-    var e DataCarrier
-    decoder := json.NewDecoder(recorder.Body)
-    err = decoder.Decode(&e)
+	var e successResponse
+	decoder := json.NewDecoder(recorder.Body)
+	err = decoder.Decode(&e)
 
-    assert.Nil(t, err)
-    assert.NotEmpty(t, e.Id)
-    assert.NotEmpty(t, e.Data.Uid)
-    assert.NotEmpty(t, e.Data.UidStr)
-    assert.Equal(t, strconv.FormatUint(e.Data.Uid, 10), e.Data.UidStr)
+	assert.Nil(t, err)
+	assert.NotEmpty(t, e.Uid)
+	assert.NotEmpty(t, e.UidStr)
+	assert.Equal(t, strconv.FormatUint(e.Uid, 10), e.UidStr)
 
-    return e
+	return e
 }
